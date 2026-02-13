@@ -1,0 +1,10 @@
+[ {
+  "name" : "abc",
+  "phone" : 1234567890,
+  "id" : 2,
+  "govtIdProof" : "GESPRTYUI",
+  "idProofType" : "AADHAR",
+  "password" : "123",
+  "userType" : "MANAGER",
+  "workingStatus" : "ACTIVE"
+} ]
