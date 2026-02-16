@@ -1,6 +1,6 @@
 package io;
 
-import Enums.TableStatus;
+import enums.TableStatus;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import env.Env;

@@ -1,8 +1,9 @@
-package DataInitializer;
+package dataInitializer;
 
 
-import Enums.TableStatus;
-import com.fasterxml.jackson.core.type.TypeReference;
+//This file is not part of the project, it is just created to add some dummy data for testing
+
+import enums.TableStatus;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import env.Env;
 

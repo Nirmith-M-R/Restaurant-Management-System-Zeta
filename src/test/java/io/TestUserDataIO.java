@@ -1,9 +1,9 @@
 package io;
 
-import Enums.IdProofType;
-import Enums.UserType;
-import Enums.WorkingStatus;
-import Model.User;
+import enums.IdProofType;
+import enums.UserType;
+import enums.WorkingStatus;
+import model.User;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

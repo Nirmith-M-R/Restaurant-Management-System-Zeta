@@ -1,10 +1,9 @@
 package services;
 
-import Enums.TableStatus;
+import enums.TableStatus;
 import io.TableBookingIO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,14 +1,6 @@
 package main;
 
-import Enums.IdProofType;
-import Enums.UserType;
-import Enums.WorkingStatus;
-import Model.User;
-import io.UserDataIO;
 import services.BookTableService;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class RMS {
     public static void main(String[] args) {

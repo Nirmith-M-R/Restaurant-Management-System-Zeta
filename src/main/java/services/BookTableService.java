@@ -1,6 +1,6 @@
 package services;
 
-import Enums.TableStatus;
+import enums.TableStatus;
 import io.TableBookingIO;
 
 import java.util.Map;

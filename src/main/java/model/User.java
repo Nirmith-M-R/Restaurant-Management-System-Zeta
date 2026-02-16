@@ -1,8 +1,8 @@
-package Model;
+package model;
 
-import Enums.IdProofType;
-import Enums.UserType;
-import Enums.WorkingStatus;
+import enums.IdProofType;
+import enums.UserType;
+import enums.WorkingStatus;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 

@@ -1,6 +1,6 @@
 package io;
 
-import Model.User;
+import model.User;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import env.Env;
