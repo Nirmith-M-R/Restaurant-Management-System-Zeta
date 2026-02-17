@@ -42,7 +42,6 @@ public class TestOrderService {
         PrintStream originalOut = System.out;
         System.setOut(new PrintStream(createOrderOutput));
         OrderService.createOrder(order);
-        System.setOut(originalOut);
         assertTrue(createOrderOutput.toString().contains("Order has been created successfully"));
 
     }
@@ -52,13 +51,13 @@ public class TestOrderService {
         try (MockedStatic<OrderIO> mocked = Mockito.mockStatic(OrderIO.class)) {
             when(OrderIO.addOrdersToFile(orders)).thenReturn(true);
             when(OrderIO.getOrdersFromFile()).thenReturn(orders);
+            ByteArrayOutputStream updateOrderOutput = new ByteArrayOutputStream();
+            PrintStream originalOut = System.out;
+            System.setOut(new PrintStream(updateOrderOutput));
+            OrderService.updateStatus(1, OrderStatus.PREPARED);
+            System.setOut(originalOut);
+            System.out.println(updateOrderOutput.toString());
+            assertTrue(updateOrderOutput.toString().contains("Order update to PREPARED successfully."));
         }
-        ByteArrayOutputStream updateOrderOutput = new ByteArrayOutputStream();
-        PrintStream originalOut = System.out;
-        System.setOut(new PrintStream(updateOrderOutput));
-        OrderService.updateStatus(1, OrderStatus.PREPARED);
-        System.setOut(originalOut);
-        System.out.println(updateOrderOutput.toString());
-        assertTrue(updateOrderOutput.toString().contains("Order update to PREPARED successfully."));
     }
 }
