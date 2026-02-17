@@ -1,5 +1,5 @@
 package enums;
 
-public enum PlaymentStatus {
+public enum PaymentStatus {
     PENDING,PAID
 }
