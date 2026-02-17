@@ -7,4 +7,15 @@
   "password" : "123",
   "userType" : "MANAGER",
   "workingStatus" : "ACTIVE"
-} ]
+} ,
+  {
+    "name" : "abc",
+    "phone" : 1234567890,
+    "id" : 1,
+    "govtIdProof" : "GESPRTYUI",
+    "idProofType" : "AADHAR",
+    "password" : "123",
+    "userType" : "WAITER",
+    "workingStatus" : "ACTIVE"
+  }
+]

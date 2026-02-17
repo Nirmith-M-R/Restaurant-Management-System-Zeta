@@ -1,7 +1,9 @@
 package services;
 
 import enums.OrderStatus;
+import io.MenuItemsIO;
 import io.OrderIO;
+import model.MenuItem;
 import model.Order;
 
 import java.util.ArrayList;
@@ -11,7 +13,13 @@ public class WaiterService {
 
     private final List<Order> activeOrders = new ArrayList<>();
 
-    public static void viewMenu(List<model.MenuItem> menu) {
+    public static void viewMenu() {
+        List<MenuItem> menu = null;
+        try {
+            menu = MenuItemsIO.loadFromFile();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         for (model.MenuItem item : menu) {
             System.out.println(item.itemId + " | " + item.name + " | ₹" + item.price);
         }

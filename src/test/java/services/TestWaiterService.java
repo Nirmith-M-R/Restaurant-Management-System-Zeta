@@ -37,7 +37,7 @@ public class TestWaiterService {
             ByteArrayOutputStream output = new ByteArrayOutputStream();
             PrintStream originalOut = System.out;
             System.setOut(new PrintStream(output));
-            WaiterService.viewMenu(menuItems);
+            WaiterService.viewMenu();
             String printed = output.toString();
             assertTrue(printed.contains("1 | Tea | ₹20"));
     }
