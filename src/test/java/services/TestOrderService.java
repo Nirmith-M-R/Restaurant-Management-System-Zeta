@@ -37,12 +37,12 @@ public class TestOrderService {
         try (MockedStatic<OrderIO> mocked = Mockito.mockStatic(OrderIO.class)) {
             when(OrderIO.addOrdersToFile(orders)).thenReturn(true);
             when(OrderIO.getOrdersFromFile()).thenReturn(orders);
+            ByteArrayOutputStream createOrderOutput = new ByteArrayOutputStream();
+            PrintStream originalOut = System.out;
+            System.setOut(new PrintStream(createOrderOutput));
+            OrderService.createOrder(order);
+            assertTrue(createOrderOutput.toString().contains("Order has been created successfully"));
         }
-        ByteArrayOutputStream createOrderOutput = new ByteArrayOutputStream();
-        PrintStream originalOut = System.out;
-        System.setOut(new PrintStream(createOrderOutput));
-        OrderService.createOrder(order);
-        assertTrue(createOrderOutput.toString().contains("Order has been created successfully"));
 
     }
 

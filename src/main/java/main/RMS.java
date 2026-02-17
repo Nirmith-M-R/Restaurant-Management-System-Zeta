@@ -19,8 +19,8 @@ public class RMS {
         while (true) {
             int id;
             String password;
-            System.out.println("LogIn as \n1.Waiter\n2.Chef\n3.Manager\n4.Customer\n5.Receptionist");
             choice = scanner.nextInt();
+            System.out.println("LogIn as \n1.Waiter\n2.Chef\n3.Manager\n4.Customer\n5.Receptionist");
             System.out.println("Enter userId: ");
             id = scanner.nextInt();
             System.out.println("Enter password: ");

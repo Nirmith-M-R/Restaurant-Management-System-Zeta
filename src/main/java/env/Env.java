@@ -7,5 +7,7 @@ public class Env {;
     public static String TABLEBOOKED = "src/main/java/data/TableBooked.json";
     public static String ORDERS = "src/main/java/data/Orders.json";
     public static String MENUITEMS = "src/main/java/data/MenuItems.json";
+    public static String BILL = "src/main/java/data/Bill.json";
+    public static String RESTAURANTNAME = "Ctrl + Eat";
 
 }
