@@ -2,17 +2,15 @@ package testsuite;
 
 import org.junit.platform.suite.api.SelectClasses;
 import org.junit.platform.suite.api.Suite;
-import services.TestAuthService;
-import services.TestBookTableService;
-import services.TestChefService;
-import services.TestOrderService;
+import services.*;
 
 @Suite
 @SelectClasses({
         TestChefService.class,
         TestOrderService.class,
         TestAuthService.class,
-        TestBookTableService.class
+        TestBookTableService.class,
+        TestWaiterService.class
 })
 public class AllTestsSuite {
 }
