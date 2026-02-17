@@ -9,15 +9,15 @@ import java.util.List;
 
 public class WaiterService {
 
-    private List<Order> activeOrders = new ArrayList<>();
+    private final List<Order> activeOrders = new ArrayList<>();
 
-    public void viewMenu(List<model.MenuItem> menu) {
+    public static void viewMenu(List<model.MenuItem> menu) {
         for (model.MenuItem item : menu) {
             System.out.println(item.itemId + " | " + item.name + " | ₹" + item.price);
         }
     }
 
-    public Order takeOrder(int OrderID, int tableNo, List<model.MenuItem> items) {
+    public static Order takeOrder(int OrderID, int tableNo, List<model.MenuItem> items) {
 
         Order order = new Order(OrderID, OrderStatus.PLACED, tableNo, items);
 
@@ -32,7 +32,7 @@ public class WaiterService {
     }
 
 
-    public void updateOrderAsServed(int orderID) {
+    public static void updateOrderAsServed(int orderID) {
         try {
             List<Order> orders = OrderIO.getOrdersFromFile();
             for (Order order : orders) {
@@ -45,6 +45,6 @@ public class WaiterService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("Order served for table with orderID: " + orderID);
+        System.out.println("Order served for table.");
     }
 }
