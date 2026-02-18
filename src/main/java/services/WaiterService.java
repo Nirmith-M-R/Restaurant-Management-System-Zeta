@@ -20,9 +20,11 @@ public class WaiterService {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        System.out.println("Item ID | Name | Price");
         for (model.MenuItem item : menu) {
             System.out.println(item.itemId + " | " + item.name + " | ₹" + item.price);
         }
+        System.out.println("\n");
     }
 
     public static Order takeOrder(int OrderID, int tableNo, List<model.MenuItem> items) {

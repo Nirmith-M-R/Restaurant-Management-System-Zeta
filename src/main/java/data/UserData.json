@@ -1,21 +1,46 @@
 [ {
-  "name" : "abc",
+  "name" : "Sargam",
   "phone" : 1234567890,
-  "id" : 2,
+  "id" : 1,
   "govtIdProof" : "GESPRTYUI",
   "idProofType" : "AADHAR",
   "password" : "123",
   "userType" : "MANAGER",
   "workingStatus" : "ACTIVE"
-} ,
-  {
-    "name" : "abc",
-    "phone" : 1234567890,
-    "id" : 1,
-    "govtIdProof" : "GESPRTYUI",
-    "idProofType" : "AADHAR",
-    "password" : "123",
-    "userType" : "WAITER",
-    "workingStatus" : "ACTIVE"
-  }
-]
+}, {
+  "name" : "Nirmith M R",
+  "phone" : 1234567890,
+  "id" : 2,
+  "govtIdProof" : "GESPRTYUI",
+  "idProofType" : "AADHAR",
+  "password" : "123",
+  "userType" : "WAITER",
+  "workingStatus" : "ACTIVE"
+}, {
+  "name" : "Divya",
+  "phone" : 12345,
+  "id" : 3,
+  "govtIdProof" : "12345",
+  "idProofType" : "VOTERID",
+  "password" : "123",
+  "userType" : "CHEF",
+  "workingStatus" : "ACTIVE"
+}, {
+  "name" : "Rahul",
+  "phone" : 1234567890,
+  "id" : 4,
+  "govtIdProof" : "234567",
+  "idProofType" : "PAN",
+  "password" : "123",
+  "userType" : "RECEPTIONIST",
+  "workingStatus" : "ACTIVE"
+}, {
+  "name" : "Krishna",
+  "phone" : 1234567890,
+  "id" : 5,
+  "govtIdProof" : "123456789012",
+  "idProofType" : "AADHAR",
+  "password" : "123",
+  "userType" : "CUSTOMER",
+  "workingStatus" : "ACTIVE"
+} ]

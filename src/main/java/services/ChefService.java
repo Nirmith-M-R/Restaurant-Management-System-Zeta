@@ -13,17 +13,20 @@ public class ChefService {
     public static List<Order> viewCurrentOrders(){
         try {
             List<Order> orders = OrderIO.getOrdersFromFile();
-            orders.forEach(order -> {
+
+            for (Order order : orders) {
                 if (order.orderStatus == OrderStatus.PLACED){
                     order.orderStatus = OrderStatus.PROCESSING;
-                    pendingOrders.add(order);
                 }
-            });
+            }
             OrderIO.addOrdersToFile(orders);
+            return orders.stream()
+                    .filter(order -> order.orderStatus == OrderStatus.PROCESSING)
+                    .toList();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return pendingOrders;
+        return new ArrayList<>();
     }
 
     public static boolean updateOrderStatus(int orderId){

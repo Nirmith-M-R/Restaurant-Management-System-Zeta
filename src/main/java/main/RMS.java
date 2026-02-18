@@ -1,65 +1,71 @@
 package main;
 
-import io.MenuItemsIO;
-import model.MenuItem;
-import model.User;
-import services.AuthService;
-import services.BookTableService;
-import services.WaiterService;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
+import env.Env;
+import util.ScannerUtil;
+import view.chef.ChefView;
+import view.customer.CustomerView;
+import view.manager.ManagerView;
+import view.receptionist.ReceptionistView;
+import view.waiter.WaiterView;
+
 public class RMS {
-    public static void main(String[] args) throws Exception {
-        System.out.println("Welcome to Your Restaurant 🏨");
-        Scanner scanner = new Scanner(System.in);
-        int choice;
+    public static void main(String[] args) {
+        Scanner scanner = ScannerUtil.getScanner();
+        System.out.println("Welcome to " + Env.RESTAURANTNAME);
 
         while (true) {
-            int id;
-            String password;
-            choice = scanner.nextInt();
-            System.out.println("LogIn as \n1.Waiter\n2.Chef\n3.Manager\n4.Customer\n5.Receptionist");
-            System.out.println("Enter userId: ");
-            id = scanner.nextInt();
-            System.out.println("Enter password: ");
-            password = scanner.next();
-            User login = AuthService.login(id, password);
-            break;
-        }
-        while(true){
-            switch (choice) {
-                case 1: {
-                    System.out.println("Welcome, you waiter!");
-                    System.out.println("1. View Menu\n2. Take Order\n3. Update order as Served");
-                    int waiterChoice = scanner.nextInt();
-                    switch (waiterChoice) {
-                        case 1:
-                            WaiterService.viewMenu();
-                            break;
-                        case 2: {
-                            System.out.println("Enter orderId: ");
-                            int orderId = scanner.nextInt();
-                            System.out.println("Enter table number: ");
-                            int tableNumber = scanner.nextInt();
-                            List<MenuItem> menuItems = MenuItemsIO.loadFromFile();
-                            WaiterService.takeOrder(orderId, tableNumber, menuItems);
-                            System.out.println("Hey Waiter, Your order has been sent to kitchen");
-                            break;
-                        }
-                        case 3: {
-                            System.out.println("Enter orderId");
-                            int orderId = scanner.nextInt();
-                            WaiterService.updateOrderAsServed(orderId);
-                            break;
-                        }
-                        default:
-                            System.out.println("Please enter correct choice");
+            try {
+                System.out.println("\n1. Login\n2. Exit");
+                int choice = scanner.nextInt();
 
-                    }
+                if (choice == 2) {
+                    System.out.println("Exiting...");
+                    break;
                 }
+
+                if (choice == 1) {
+                    System.out.print("Enter User ID: ");
+                    int id = scanner.nextInt();
+
+                    System.out.print("Enter Password: ");
+                    String password = scanner.next();
+
+                    model.User user = services.AuthService.login(id, password);
+
+                    if (user.getUserType() == enums.UserType.INVALID) {
+                        System.out.println("Invalid credentials. Please try again.");
+                        continue;
+                    }
+
+                    System.out.println("Login Successful as " + user.getUserType());
+
+                    switch (user.getUserType()) {
+                        case MANAGER:
+                            ManagerView.managerView(user.getName());
+                            break;
+                        case CUSTOMER:
+                            CustomerView.customerView(user.getName());
+                            break;
+                        case CHEF:
+                            ChefView.chefView(user.getName());
+                            break;
+                        case WAITER:
+                            WaiterView.waiterView(user.getName());
+                            break;
+                        case RECEPTIONIST:
+                            ReceptionistView.receptionistView(user.getName());
+                            break;
+                        default:
+                            System.out.println("Role not supported yet.");
+                    }
+                } else {
+                    System.out.println("Invalid choice.");
+                }
+            } catch (Exception e) {
+                System.out.println("Invalid input. Please enter a valid number.");
+                scanner.nextLine();
             }
         }
     }

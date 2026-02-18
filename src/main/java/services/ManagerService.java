@@ -1,10 +1,7 @@
 package services;
 
-import enums.IdProofType;
 import enums.PaymentStatus;
-import enums.UserType;
 import enums.WorkingStatus;
-import env.Env;
 import io.BillIO;
 import io.MenuItemsIO;
 import io.OrderIO;
@@ -14,10 +11,8 @@ import model.MenuItem;
 import model.Order;
 import model.User;
 
-import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class ManagerService {
     public static Bill generateBill(int orderId){
@@ -27,14 +22,17 @@ public class ManagerService {
             for (Order order:orders){
                 if (order.orderId==orderId){
                     billOrder = order;
-                    break;
                 }
             }
             double billAmount = 0;
             for(MenuItem menuItem: billOrder.itemList){
                 billAmount+=menuItem.price;
             }
-            return new Bill(orderId, billAmount, PaymentStatus.PENDING);
+            Bill bill = new Bill(orderId, billAmount, PaymentStatus.PENDING);
+            List<Bill> bills = BillIO.getBillsFromFile();
+            bills.add(bill);
+            BillIO.addOrUpdateBillToFile(bills);
+            return bill;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -98,83 +96,13 @@ public class ManagerService {
     public static boolean addStaff(User user){
 
             List<User> users = UserDataIO.loadFromFile();
-
             if(users == null){
                 users = new ArrayList<>();
             }
-
             users.add(user);
-
             UserDataIO.saveToFile(users);
-
             return true;
     }
-
-//    public static void manageStaff(){
-//        Scanner scanner = new Scanner(System.in);
-//        System.out.println("Manage Staff Data:\n1.Change Working Status\n2. Change staff data");
-//        int choice = scanner.nextInt();
-//        List<User> users = UserDataIO.loadFromFile();
-//        switch (choice){
-//            case 1: {
-//                System.out.println("Enter userId: ");
-//                int id = scanner.nextInt();
-//                for (User user: users){
-//                    if (user.getId()==id){
-//                        if (user.getWorkingStatus()==WorkingStatus.ACTIVE){
-//                            user.setWorkingStatus(WorkingStatus.INACTIVE);
-//                            System.out.println(String.format("Staff %s is set to Inactive",user.getName()));
-//                        }else{
-//                            user.setWorkingStatus(WorkingStatus.ACTIVE);
-//                            System.out.println(String.format("Staff %s is set to Active",user.getName()));
-//                        }
-//                        break;
-//                    }
-//                }
-//                break;
-//            }
-//            case 2: {
-//                System.out.println("Enter userId: ");
-//                int id = scanner.nextInt();
-//                System.out.println("Change:\n1. Phone number\n2. Password\n");
-//                int changeChoice = scanner.nextInt();
-//                switch (changeChoice){
-//                    case 1: {
-//                        System.out.println("Enter new phone number: ");
-//                        int phno = scanner.nextInt();
-//                        for (User user: users){
-//                            if (user.getId()==id){
-//                                user.setPhone(phno);
-//                                System.out.println(String.format("Staff: %s phone number has been updated",user.getName()));
-//                                break;
-//                            }
-//                        }
-//                        break;
-//                    }
-//                    case 2: {
-//                        Console console = System.console();
-//                        if (console == null) return;
-//                        char[] passwordChar = console.readPassword("Enter new password: ");
-//                        String newPassword = new String(passwordChar);
-//                        for (User user: users){
-//                            if (user.getId()==id){
-//                                user.setPassword(newPassword);
-//                                System.out.println(String.format("Staff: %s password has been updated",user.getName()));
-//                                break;
-//                            }
-//                        }
-//                        break;
-//                    }
-//                    default:
-//                        System.out.println("Invalid input");
-//                        return ;
-//                }
-//            }
-//            default:
-//                System.out.println("Invalid Input.");
-//                return;
-//        }
-//    }
 
     public static boolean toggleWorkingStatus(int id) {
 

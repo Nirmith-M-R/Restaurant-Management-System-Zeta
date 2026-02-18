@@ -11,12 +11,19 @@ public class ManageStaffView {
     public static void manageStaff() {
 
         Scanner scanner = ScannerUtil.getScanner();
-        System.out.println("Manage Staff Data:\n1. Change Working Status\n2. Change staff data");
-        int choice = scanner.nextInt();
-        switch (choice) {
-            case 1 -> changeWorkingStatus(scanner);
-            case 2 -> changeStaffData(scanner);
-            default -> System.out.println("Invalid Input.");
+        {
+            try {
+                System.out.println("Manage Staff Data:\n1. Change Working Status\n2. Change staff data");
+                int choice = scanner.nextInt();
+                switch (choice) {
+                    case 1 -> changeWorkingStatus(scanner);
+                    case 2 -> changeStaffData(scanner);
+                    default -> System.out.println("Invalid Input.");
+                }
+            } catch (Exception e) {
+                System.out.println("Invalid input. Please enter a valid number.");
+                scanner.nextLine();
+            }
         }
     }
 
@@ -37,43 +44,48 @@ public class ManageStaffView {
 
     private static void changeStaffData(Scanner scanner) {
 
-        System.out.println("Enter userId: ");
-        int id = scanner.nextInt();
+        try {
+            System.out.println("Enter userId: ");
+            int id = scanner.nextInt();
 
-        System.out.println("Change:\n1. Phone number\n2. Password");
+            System.out.println("Change:\n1. Phone number\n2. Password");
 
-        int changeChoice = scanner.nextInt();
+            int changeChoice = scanner.nextInt();
 
-        switch (changeChoice) {
+            switch (changeChoice) {
 
-            case 1 -> {
-                System.out.println("Enter new phone number: ");
-                int phno = scanner.nextInt();
+                case 1 -> {
+                    System.out.println("Enter new phone number: ");
+                    int phno = scanner.nextInt();
 
-                boolean updated = ManagerService.updatePhoneNumber(id, phno);
+                    boolean updated = ManagerService.updatePhoneNumber(id, phno);
 
-                if (updated)
-                    System.out.println("Phone updated.");
-                else
-                    System.out.println("User not found.");
-            }
-
-            case 2 -> {
-                Console console = System.console();
-                if (console == null) {
-                    System.out.println("Run in terminal!");
-                    return;
+                    if (updated)
+                        System.out.println("Phone updated.");
+                    else
+                        System.out.println("User not found.");
                 }
 
-                char[] password = console.readPassword("Enter new password: ");
-                boolean updated = ManagerService.updatePassword(id, password);
+                case 2 -> {
+                    Console console = System.console();
+                    if (console == null) {
+                        System.out.println("Run in terminal!");
+                        return;
+                    }
 
-                if (updated)
-                    System.out.println("Password updated.");
-                else
-                    System.out.println("User not found.");
+                    char[] password = console.readPassword("Enter new password: ");
+                    boolean updated = ManagerService.updatePassword(id, password);
+
+                    if (updated)
+                        System.out.println("Password updated.");
+                    else
+                        System.out.println("User not found.");
+                }
+                default -> System.out.println("Invalid input");
             }
-            default -> System.out.println("Invalid input");
+        } catch (Exception e) {
+            System.out.println("Invalid input. Please enter a valid number.");
+            scanner.nextLine();
         }
     }
 }

@@ -16,24 +16,33 @@ public class CustomerView {
         Scanner scanner = ScannerUtil.getScanner();
 
         while(true){
-            System.out.println(String.format("Welcome, %s to %s", name, Env.RESTAURANTNAME));
-            System.out.println("\n1. View Menu\n2. Check Availability of Tables\n3. Book a Table");
-            int customerChoice = scanner.nextInt();
-            switch (customerChoice){
-                case 1:{
-                    CustomerService.viewMenu();
-                    break;
+            try{
+                System.out.println(String.format("Welcome, %s to %s", name, Env.RESTAURANTNAME));
+                System.out.println("\n1. View Menu\n2. Check Availability of Tables\n3. Book a Table\n4. Logout");
+                int customerChoice = scanner.nextInt();
+                switch (customerChoice) {
+                    case 1: {
+                        CustomerService.viewMenu();
+                        break;
+                    }
+                    case 2: {
+                        CustomerService.checkTableAvailability();
+                        break;
+                    }
+                    case 3: {
+                        CustomerService.bookTable();
+                        break;
+                    }
+                    case 4:{
+                        System.out.println("Logging out...");
+                        return;
+                    }
+                    default:
+                        System.out.println("Invalid input");
                 }
-                case 2:{
-                    CustomerService.checkTableAvailability();
-                    break;
-                }
-                case 3:{
-                    CustomerService.bookTable();
-                    break;
-                }
-                default:
-                    System.out.println("Invalid input");
+            }catch (Exception exception){
+                System.out.println("Invalid input. Please enter a valid number.");
+                scanner.nextLine();
             }
         }
     }

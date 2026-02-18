@@ -4,13 +4,14 @@ import enums.UserType;
 import env.Env;
 import model.User;
 import services.AuthService;
+import util.ScannerUtil;
 
 import java.io.Console;
 import java.util.Scanner;
 
 public class LoginView {
     public static void loginView(){
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = ScannerUtil.getScanner();
         System.out.println(String.format("Welcome to, %s", Env.RESTAURANTNAME));
         System.out.println("======= Login Page =======");
         System.out.println("Enter user ID: ");

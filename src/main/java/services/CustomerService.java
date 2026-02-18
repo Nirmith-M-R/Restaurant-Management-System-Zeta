@@ -17,9 +17,11 @@ public class CustomerService {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        System.out.println("Item ID | Name | Price");
         for (model.MenuItem item : menu) {
             System.out.println(item.itemId + " | " + item.name + " | ₹" + item.price);
         }
+        System.out.println("\n");
     }
 
     public static void bookTable(){
