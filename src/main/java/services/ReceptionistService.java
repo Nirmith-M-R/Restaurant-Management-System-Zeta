@@ -10,7 +10,8 @@ import model.Order;
 import java.util.List;
 
 public class ReceptionistService {
-    public void bookTableForWalkIns(){
+
+    public static void bookTableForWalkIns(){
         System.out.println("Booking table for walk-in customer...");
         BookTableService.bookTable();
     }
@@ -46,7 +47,7 @@ public class ReceptionistService {
             }
         }
         Bill bill = new Bill(tableNumber,totalAmount, PaymentStatus.PENDING);
-
+        System.out.println("Bill generated successfully for table " + tableNumber);
     }
 }
 
