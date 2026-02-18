@@ -2,6 +2,7 @@ package services;
 
 import enums.*;
 import io.BillIO;
+import io.MenuItemsIO;
 import io.OrderIO;
 import io.UserDataIO;
 import model.Bill;
@@ -94,19 +95,6 @@ public class TestManagerService {
         }
     }
 
-//    @Test
-//    public void testAddStaff(){
-//        try(MockedStatic<UserDataIO> mocked = Mockito.mockStatic(UserDataIO.class)){
-//            mocked.when(()-> UserDataIO.loadFromFile()).thenReturn(users);
-//            ManagerService.addStaff();
-//        }
-//    }
-
-    // test addStaff also
-    @Test
-    public void testAddStaff(){}
-
-    // test manage staff also
     @Test
     public void testToggleWorkingStatus(){
         try(MockedStatic<UserDataIO> mocked = Mockito.mockStatic(UserDataIO.class)){
@@ -131,6 +119,24 @@ public class TestManagerService {
             mocked.when(() -> UserDataIO.loadFromFile()).thenReturn(users);
             ManagerService.updatePassword(1, "345".toCharArray());
             assertEquals("345",users.get(0).getPassword());
+        }
+    }
+
+    @Test
+    public void testAddMenu(){
+        try(MockedStatic<MenuItemsIO> mocked = Mockito.mockStatic(MenuItemsIO.class)) {
+            mocked.when(() -> MenuItemsIO.loadFromFile()).thenReturn(menuItems);
+            ManagerService.addMenuItem("100","BisibeleBath",50.0);
+            assertEquals("100",menuItems.get(1).itemId);
+        }
+    }
+
+    @Test
+    public void testAddStaff(){
+        try(MockedStatic<UserDataIO> mocked = Mockito.mockStatic(UserDataIO.class)) {
+            mocked.when(() -> UserDataIO.loadFromFile()).thenReturn(users);
+            ManagerService.addStaff(new User("abc", 1234567890, 1, "123", IdProofType.AADHAR, "123", UserType.CHEF, WorkingStatus.ACTIVE));
+            assertEquals("123", users.get(1).getPassword());
         }
     }
 }
