@@ -52,7 +52,6 @@ public class WaiterView {
                     System.out.println("Enter order id");
                     int orderId = scanner.nextInt();
                     WaiterService.updateOrderAsServed(orderId);
-                    System.out.println("Updated order as served.");
                     break;
                 }
                 default:

@@ -2,6 +2,7 @@ package main;
 
 import io.MenuItemsIO;
 import model.MenuItem;
+import model.User;
 import services.AuthService;
 import services.BookTableService;
 import services.WaiterService;
@@ -25,11 +26,8 @@ public class RMS {
             id = scanner.nextInt();
             System.out.println("Enter password: ");
             password = scanner.next();
-            boolean login = AuthService.login(id, password);
-            if (login) {
-                System.out.println("You are a verified user ✅");
-                break;
-            }
+            User login = AuthService.login(id, password);
+            break;
         }
         while(true){
             switch (choice) {

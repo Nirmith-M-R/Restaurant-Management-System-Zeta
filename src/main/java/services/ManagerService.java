@@ -141,83 +141,127 @@ public class ManagerService {
         System.out.println("User has been added successfully.");
     }
 
-    public static void manageStaff(){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Manage Staff Data:\n1.Change Working Status\n2. Change staff data");
-        int choice = scanner.nextInt();
+//    public static void manageStaff(){
+//        Scanner scanner = new Scanner(System.in);
+//        System.out.println("Manage Staff Data:\n1.Change Working Status\n2. Change staff data");
+//        int choice = scanner.nextInt();
+//        List<User> users = UserDataIO.loadFromFile();
+//        switch (choice){
+//            case 1: {
+//                System.out.println("Enter userId: ");
+//                int id = scanner.nextInt();
+//                for (User user: users){
+//                    if (user.getId()==id){
+//                        if (user.getWorkingStatus()==WorkingStatus.ACTIVE){
+//                            user.setWorkingStatus(WorkingStatus.INACTIVE);
+//                            System.out.println(String.format("Staff %s is set to Inactive",user.getName()));
+//                        }else{
+//                            user.setWorkingStatus(WorkingStatus.ACTIVE);
+//                            System.out.println(String.format("Staff %s is set to Active",user.getName()));
+//                        }
+//                        break;
+//                    }
+//                }
+//                break;
+//            }
+//            case 2: {
+//                System.out.println("Enter userId: ");
+//                int id = scanner.nextInt();
+//                System.out.println("Change:\n1. Phone number\n2. Password\n");
+//                int changeChoice = scanner.nextInt();
+//                switch (changeChoice){
+//                    case 1: {
+//                        System.out.println("Enter new phone number: ");
+//                        int phno = scanner.nextInt();
+//                        for (User user: users){
+//                            if (user.getId()==id){
+//                                user.setPhone(phno);
+//                                System.out.println(String.format("Staff: %s phone number has been updated",user.getName()));
+//                                break;
+//                            }
+//                        }
+//                        break;
+//                    }
+//                    case 2: {
+//                        Console console = System.console();
+//                        if (console == null) return;
+//                        char[] passwordChar = console.readPassword("Enter new password: ");
+//                        String newPassword = new String(passwordChar);
+//                        for (User user: users){
+//                            if (user.getId()==id){
+//                                user.setPassword(newPassword);
+//                                System.out.println(String.format("Staff: %s password has been updated",user.getName()));
+//                                break;
+//                            }
+//                        }
+//                        break;
+//                    }
+//                    default:
+//                        System.out.println("Invalid input");
+//                        return ;
+//                }
+//            }
+//            default:
+//                System.out.println("Invalid Input.");
+//                return;
+//        }
+//    }
+
+    public static boolean toggleWorkingStatus(int id) {
+
         List<User> users = UserDataIO.loadFromFile();
-        switch (choice){
-            case 1: {
-                System.out.println("Enter userId: ");
-                int id = scanner.nextInt();
-                for (User user: users){
-                    if (user.getId()==id){
-                        if (user.getWorkingStatus()==WorkingStatus.ACTIVE){
-                            user.setWorkingStatus(WorkingStatus.INACTIVE);
-                            System.out.println(String.format("Staff %s is set to Inactive",user.getName()));
-                        }else{
-                            user.setWorkingStatus(WorkingStatus.ACTIVE);
-                            System.out.println(String.format("Staff %s is set to Active",user.getName()));
-                        }
-                        break;
-                    }
-                }
-                break;
-            }
-            case 2: {
-                System.out.println("Enter userId: ");
-                int id = scanner.nextInt();
-                System.out.println("Change:\n1. Phone number\n2. Password\n");
-                int changeChoice = scanner.nextInt();
-                switch (changeChoice){
-                    case 1: {
-                        System.out.println("Enter new phone number: ");
-                        int phno = scanner.nextInt();
-                        for (User user: users){
-                            if (user.getId()==id){
-                                user.setPhone(phno);
-                                System.out.println(String.format("Staff: %s phone number has been updated",user.getName()));
-                                break;
-                            }
-                        }
-                        break;
-                    }
-                    case 2: {
-                        Console console = System.console();
-                        if (console == null) return;
-                        char[] passwordChar = console.readPassword("Enter new password: ");
-                        String newPassword = new String(passwordChar);
-                        for (User user: users){
-                            if (user.getId()==id){
-                                user.setPassword(newPassword);
-                                System.out.println(String.format("Staff: %s password has been updated",user.getName()));
-                                break;
-                            }
-                        }
-                        break;
-                    }
-                    default:
-                        System.out.println("Invalid input");
-                        return ;
+
+        for (User user : users) {
+            if (user.getId() == id) {
+
+                if (user.getWorkingStatus() == WorkingStatus.ACTIVE) {
+                    user.setWorkingStatus(WorkingStatus.INACTIVE);
+                } else {
+                    user.setWorkingStatus(WorkingStatus.ACTIVE);
                 }
 
+                UserDataIO.saveToFile(users);
+                return true;
             }
-            default:
-                System.out.println("Invalid Input.");
-                return;
         }
+        return false;
     }
 
-    public static void addMenuItem(){
+    public static boolean updatePhoneNumber(int id, int phone) {
+
+        List<User> users = UserDataIO.loadFromFile();
+
+        for (User user : users) {
+            if (user.getId() == id) {
+                user.setPhone(phone);
+                UserDataIO.saveToFile(users);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean updatePassword(int id, char[] passwordChar) {
+
+        List<User> users = UserDataIO.loadFromFile();
+
+        String newPassword = new String(passwordChar);
+
+        for (User user : users) {
+            if (user.getId() == id) {
+                user.setPassword(newPassword);
+                UserDataIO.saveToFile(users);
+                return true;
+            }
+        }
+
+        java.util.Arrays.fill(passwordChar, ' ');
+        return false;
+    }
+
+    public static void addMenuItem(String id, String name, double price){
         try {
-            Scanner scanner = new Scanner(System.in);
             List<MenuItem> menuItems = MenuItemsIO.loadFromFile();
-            System.out.println("Enter item Id");
-            String id = scanner.next();
-            System.out.println("Enter item name: ");
-            String name = scanner.next();
-            System.out.println("Enter price: ");
-            double price = scanner.nextDouble();
             menuItems.add(new MenuItem(id, name, price));
             MenuItemsIO.addMenuToFile(menuItems);
         } catch (Exception e) {

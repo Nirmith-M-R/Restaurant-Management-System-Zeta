@@ -1,7 +1,6 @@
 package services;
 
-import enums.OrderStatus;
-import enums.PaymentStatus;
+import enums.*;
 import io.BillIO;
 import io.OrderIO;
 import io.UserDataIO;
@@ -40,6 +39,8 @@ public class TestManagerService {
         bills = new ArrayList<>();
         bills.add(new Bill(1, 200.0, PaymentStatus.PENDING));
         users = new ArrayList<>();
+        users.add(new User("abc", 1234567890, 1, "123", IdProofType.AADHAR, "123", UserType.CHEF, WorkingStatus.ACTIVE));
+
     }
 
     @Test
@@ -102,5 +103,34 @@ public class TestManagerService {
 //    }
 
     // test addStaff also
+    @Test
+    public void testAddStaff(){}
+
     // test manage staff also
+    @Test
+    public void testToggleWorkingStatus(){
+        try(MockedStatic<UserDataIO> mocked = Mockito.mockStatic(UserDataIO.class)){
+            mocked.when(()->UserDataIO.loadFromFile()).thenReturn(users);
+            boolean res = ManagerService.toggleWorkingStatus(1);
+            assertTrue(res);
+        }
+    }
+
+    @Test
+    public void testUpdatePhoneNumber(){
+        try(MockedStatic<UserDataIO> mocked = Mockito.mockStatic(UserDataIO.class)){
+            mocked.when(()->UserDataIO.loadFromFile()).thenReturn(users);
+            ManagerService.updatePhoneNumber(1, 87654321);
+            assertEquals(87654321, users.get(0).getPhone());
+        }
+    }
+
+    @Test
+    public void testUpdatePassword(){
+        try(MockedStatic<UserDataIO> mocked = Mockito.mockStatic(UserDataIO.class)) {
+            mocked.when(() -> UserDataIO.loadFromFile()).thenReturn(users);
+            ManagerService.updatePassword(1, "345".toCharArray());
+            assertEquals("345",users.get(0).getPassword());
+        }
+    }
 }

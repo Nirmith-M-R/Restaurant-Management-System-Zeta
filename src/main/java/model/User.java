@@ -40,6 +40,7 @@ public class User {
     }
 
     public User(UserType userType){
+        this.id = -1;
         this.userType = userType;
     }
 
