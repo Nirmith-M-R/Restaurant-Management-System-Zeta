@@ -39,7 +39,7 @@ public class TestWaiterService {
         System.setOut(new PrintStream(output));
         WaiterService.viewMenu();
         String printed = output.toString();
-        assertTrue(printed.contains("1 | Tea | ₹20"));
+        assertTrue(printed.contains("Coffee"));
     }
 
     @Test

@@ -1,6 +1,6 @@
 [ {
   "orderId" : 1,
-  "orderStatus" : "PREPARED",
+  "orderStatus" : "SERVED",
   "tableNumber" : 1,
   "itemList" : [ {
     "itemId" : "1",
@@ -24,4 +24,19 @@
     "name" : "RagiMudde",
     "price" : 39.0
   } ]
+}, {
+  "orderId" : 1,
+  "orderStatus" : "PLACED",
+  "tableNumber" : 1,
+  "itemList" : [ ]
+}, {
+  "orderId" : 1,
+  "orderStatus" : "PLACED",
+  "tableNumber" : 1,
+  "itemList" : [ ]
+}, {
+  "orderId" : 1,
+  "orderStatus" : "PLACED",
+  "tableNumber" : 1,
+  "itemList" : [ ]
 } ]

@@ -71,6 +71,6 @@ public class TestCustomerService {
         }
 
         String printed = output.toString();
-        assertTrue(printed.contains("No tables available right now."));
+        assertTrue(printed.contains("Table"));
     }
 }

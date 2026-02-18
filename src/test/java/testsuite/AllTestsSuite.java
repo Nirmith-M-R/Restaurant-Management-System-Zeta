@@ -1,6 +1,5 @@
 package testsuite;
 
-import org.junit.Test;
 import org.junit.platform.suite.api.SelectClasses;
 import org.junit.platform.suite.api.Suite;
 import services.*;
