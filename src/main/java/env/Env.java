@@ -8,6 +8,6 @@ public class Env {;
     public static String ORDERS = "src/main/java/data/Orders.json";
     public static String MENUITEMS = "src/main/java/data/MenuItems.json";
     public static String BILL = "src/main/java/data/Bill.json";
-    public static String RESTAURANTNAME = "Ctrl + Eat";
-
+    public static String RESTAURANTNAME = "Ctrl + Eat"; //TODO: find a name
+    public static String SOFTWARENAME = ""; //TODO: find a name
 }

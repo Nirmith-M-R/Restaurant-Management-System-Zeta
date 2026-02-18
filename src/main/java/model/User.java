@@ -39,6 +39,10 @@ public class User {
         this.workingStatus = workingStatus;
     }
 
+    public User(UserType userType){
+        this.userType = userType;
+    }
+
     public String getName() {
         return name;
     }
