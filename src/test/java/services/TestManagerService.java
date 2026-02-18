@@ -31,7 +31,7 @@ public class TestManagerService {
     List<User> users;
 
     @BeforeEach
-    public void setup(){
+    public void setup() {
         menuItems = new ArrayList<>();
         menuItems.add(new MenuItem("1", "tea", 200.0));
         order = new Order(1, OrderStatus.PLACED, 1, menuItems);
@@ -46,7 +46,7 @@ public class TestManagerService {
 
     @Test
     public void testGenerateBill() throws Exception {
-        try(MockedStatic<OrderIO> mocked = Mockito.mockStatic(OrderIO.class)){
+        try (MockedStatic<OrderIO> mocked = Mockito.mockStatic(OrderIO.class)) {
             when(OrderIO.getOrdersFromFile()).thenReturn(orders);
             Bill generatedBill = ManagerService.generateBill(1);
             assertEquals(200, generatedBill.totalAmount);
@@ -54,8 +54,8 @@ public class TestManagerService {
     }
 
     @Test
-    public void testRecievePayment(){
-        try(MockedStatic<BillIO> mocked = Mockito.mockStatic(BillIO.class)){
+    public void testRecievePayment() {
+        try (MockedStatic<BillIO> mocked = Mockito.mockStatic(BillIO.class)) {
             when(BillIO.getBillsFromFile()).thenReturn(bills);
             ManagerService.receivePayment(1);
             assertEquals(PaymentStatus.PAID, bills.get(0).paymentStatus);
@@ -65,10 +65,10 @@ public class TestManagerService {
     }
 
     @Test
-    public void testViewSalesReport(){
+    public void testViewSalesReport() {
         bills.add(new Bill(2, 500.0, PaymentStatus.PAID));
-        try(MockedStatic<BillIO> mocked = Mockito.mockStatic(BillIO.class)){
-            mocked.when(()->BillIO.getBillsFromFile()).thenReturn(bills);
+        try (MockedStatic<BillIO> mocked = Mockito.mockStatic(BillIO.class)) {
+            mocked.when(() -> BillIO.getBillsFromFile()).thenReturn(bills);
             ByteArrayOutputStream salesReportOutput = new ByteArrayOutputStream();
             PrintStream originalOut = System.out;
             System.setOut(new PrintStream(salesReportOutput));
@@ -80,13 +80,13 @@ public class TestManagerService {
     }
 
     @Test
-    public void testViewOrdersReport(){
+    public void testViewOrdersReport() {
         List<MenuItem> menuItems2 = new ArrayList<>();
         menuItems2.add(new MenuItem("2", "Dosa", 500.0));
         Order order2 = new Order(1, OrderStatus.PLACED, 1, menuItems2);
         orders.add(order2);
-        try(MockedStatic<OrderIO> mocked = Mockito.mockStatic(OrderIO.class)){
-            mocked.when(()->OrderIO.getOrdersFromFile()).thenReturn(orders);
+        try (MockedStatic<OrderIO> mocked = Mockito.mockStatic(OrderIO.class)) {
+            mocked.when(() -> OrderIO.getOrdersFromFile()).thenReturn(orders);
             ByteArrayOutputStream viewOrdersReportOutput = new ByteArrayOutputStream();
             PrintStream originalOut = System.out;
             System.setOut(new PrintStream(viewOrdersReportOutput));
@@ -96,44 +96,44 @@ public class TestManagerService {
     }
 
     @Test
-    public void testToggleWorkingStatus(){
-        try(MockedStatic<UserDataIO> mocked = Mockito.mockStatic(UserDataIO.class)){
-            mocked.when(()->UserDataIO.loadFromFile()).thenReturn(users);
+    public void testToggleWorkingStatus() {
+        try (MockedStatic<UserDataIO> mocked = Mockito.mockStatic(UserDataIO.class)) {
+            mocked.when(() -> UserDataIO.loadFromFile()).thenReturn(users);
             boolean res = ManagerService.toggleWorkingStatus(1);
             assertTrue(res);
         }
     }
 
     @Test
-    public void testUpdatePhoneNumber(){
-        try(MockedStatic<UserDataIO> mocked = Mockito.mockStatic(UserDataIO.class)){
-            mocked.when(()->UserDataIO.loadFromFile()).thenReturn(users);
+    public void testUpdatePhoneNumber() {
+        try (MockedStatic<UserDataIO> mocked = Mockito.mockStatic(UserDataIO.class)) {
+            mocked.when(() -> UserDataIO.loadFromFile()).thenReturn(users);
             ManagerService.updatePhoneNumber(1, 87654321);
             assertEquals(87654321, users.get(0).getPhone());
         }
     }
 
     @Test
-    public void testUpdatePassword(){
-        try(MockedStatic<UserDataIO> mocked = Mockito.mockStatic(UserDataIO.class)) {
+    public void testUpdatePassword() {
+        try (MockedStatic<UserDataIO> mocked = Mockito.mockStatic(UserDataIO.class)) {
             mocked.when(() -> UserDataIO.loadFromFile()).thenReturn(users);
             ManagerService.updatePassword(1, "345".toCharArray());
-            assertEquals("345",users.get(0).getPassword());
+            assertEquals("345", users.get(0).getPassword());
         }
     }
 
     @Test
-    public void testAddMenu(){
-        try(MockedStatic<MenuItemsIO> mocked = Mockito.mockStatic(MenuItemsIO.class)) {
+    public void testAddMenu() {
+        try (MockedStatic<MenuItemsIO> mocked = Mockito.mockStatic(MenuItemsIO.class)) {
             mocked.when(() -> MenuItemsIO.loadFromFile()).thenReturn(menuItems);
-            ManagerService.addMenuItem("100","BisibeleBath",50.0);
-            assertEquals("100",menuItems.get(1).itemId);
+            ManagerService.addMenuItem("100", "BisibeleBath", 50.0);
+            assertEquals("100", menuItems.get(1).itemId);
         }
     }
 
     @Test
-    public void testAddStaff(){
-        try(MockedStatic<UserDataIO> mocked = Mockito.mockStatic(UserDataIO.class)) {
+    public void testAddStaff() {
+        try (MockedStatic<UserDataIO> mocked = Mockito.mockStatic(UserDataIO.class)) {
             mocked.when(() -> UserDataIO.loadFromFile()).thenReturn(users);
             ManagerService.addStaff(new User("abc", 1234567890, 1, "123", IdProofType.AADHAR, "123", UserType.CHEF, WorkingStatus.ACTIVE));
             assertEquals("123", users.get(1).getPassword());

@@ -21,12 +21,11 @@ public class TestCustomerService {
     List<Order> orders;
 
     @BeforeEach
-    public void setup(){
+    public void setup() {
         menuItems = new ArrayList<>();
-        //order = new Order(1, OrderStatus.PLACED, 1, menuItems);
-        //orders = new ArrayList<>();
-        //orders.add(order);
+
     }
+
     @Test
     public void testViewMenu() throws Exception {
         List<MenuItem> menuItems = new ArrayList<>();
@@ -43,6 +42,7 @@ public class TestCustomerService {
 
         assertTrue(printed.contains("2 | Coffee | ₹200"));
     }
+
     @Test
     public void testBookTable() {
         CustomerService service = new CustomerService();
@@ -59,7 +59,7 @@ public class TestCustomerService {
     }
 
     @Test
-    void testCheckTableAvailability() throws Exception{
+    void testCheckTableAvailability() throws Exception {
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         PrintStream originalOut = System.out;
 
@@ -71,7 +71,6 @@ public class TestCustomerService {
         }
 
         String printed = output.toString();
-        //assertTrue(printed.contains("TABLE 1 : UNAVAILABLE"));
         assertTrue(printed.contains("No tables available right now."));
     }
 }

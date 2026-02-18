@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestAuthService {
     @Test
-    public void testLogin(){
-        assertEquals(2, (AuthService.login(2,"123")).getId());
+    public void testLogin() {
+        assertEquals(2, (AuthService.login(2, "123")).getId());
     }
 }

@@ -24,7 +24,7 @@ public class CustomerService {
         System.out.println("\n");
     }
 
-    public static void bookTable(){
+    public static void bookTable() {
         System.out.println("Booking table.");
         BookTableService.bookTable();
     }

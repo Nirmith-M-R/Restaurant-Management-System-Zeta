@@ -24,7 +24,7 @@ public class TestWaiterService {
     List<Order> orders;
 
     @BeforeEach
-    public void setup(){
+    public void setup() {
         menuItems = new ArrayList<>();
         order = new Order(1, OrderStatus.PLACED, 1, menuItems);
         orders = new ArrayList<>();
@@ -32,32 +32,32 @@ public class TestWaiterService {
     }
 
     @Test
-    public void testViewMenu() throws Exception{
-            menuItems.add(new MenuItem("1", "Tea", 20));
-            ByteArrayOutputStream output = new ByteArrayOutputStream();
-            PrintStream originalOut = System.out;
-            System.setOut(new PrintStream(output));
-            WaiterService.viewMenu();
-            String printed = output.toString();
-            assertTrue(printed.contains("1 | Tea | ₹20"));
+    public void testViewMenu() throws Exception {
+        menuItems.add(new MenuItem("1", "Tea", 20));
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(output));
+        WaiterService.viewMenu();
+        String printed = output.toString();
+        assertTrue(printed.contains("1 | Tea | ₹20"));
     }
 
     @Test
-    public void testTakeOrder() throws Exception{
+    public void testTakeOrder() throws Exception {
         try (MockedStatic<OrderIO> mocked = Mockito.mockStatic(OrderIO.class)) {
-            mocked.when(()->OrderIO.getOrdersFromFile()).thenReturn(orders);
-            mocked.when(()->OrderIO.addOrdersToFile(orders)).thenReturn(true);
+            mocked.when(() -> OrderIO.getOrdersFromFile()).thenReturn(orders);
+            mocked.when(() -> OrderIO.addOrdersToFile(orders)).thenReturn(true);
         }
-        Order received = WaiterService.takeOrder(1,1,menuItems);
+        Order received = WaiterService.takeOrder(1, 1, menuItems);
         assertEquals(order.orderId, received.orderId);
         assertEquals(order.tableNumber, received.tableNumber);
     }
 
     @Test
-    public void testUpdateOrderAsServed() throws Exception{
+    public void testUpdateOrderAsServed() throws Exception {
         try (MockedStatic<OrderIO> mocked = Mockito.mockStatic(OrderIO.class)) {
-            mocked.when(()->OrderIO.getOrdersFromFile()).thenReturn(orders);
-            mocked.when(()->OrderIO.addOrdersToFile(orders)).thenReturn(true);
+            mocked.when(() -> OrderIO.getOrdersFromFile()).thenReturn(orders);
+            mocked.when(() -> OrderIO.addOrdersToFile(orders)).thenReturn(true);
         }
         ByteArrayOutputStream updateOrderOutput = new ByteArrayOutputStream();
         PrintStream originalOutput = System.out;

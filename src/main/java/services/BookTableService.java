@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class BookTableService {
-    public static void bookTable(){
+    public static void bookTable() {
         try {
             Map<Integer, TableStatus> tables = TableBookingIO.getTablesAvailability();
             AtomicInteger bookedTableNum = new AtomicInteger();
@@ -21,7 +21,7 @@ public class BookTableService {
                 }
             }
             TableBookingIO.setTableAvailability(tables);
-            System.out.println("Your Table is booked\nYour Table number is : "+bookedTableNum);
+            System.out.println("Your Table is booked\nYour Table number is : " + bookedTableNum);
         } catch (Exception e) {
             System.out.println("Sorry, We are unable to book table right now.");
 

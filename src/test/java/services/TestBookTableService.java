@@ -21,19 +21,19 @@ public class TestBookTableService {
     Map<Integer, TableStatus> tables;
 
     @BeforeEach
-    void setup(){
+    void setup() {
         tables = new HashMap<>();
-        tables.put(1,TableStatus.AVAILABLE);
-        tables.put(2,TableStatus.AVAILABLE);
-        tables.put(3,TableStatus.AVAILABLE);
-        tables.put(4,TableStatus.AVAILABLE);
-        tables.put(5,TableStatus.AVAILABLE);
+        tables.put(1, TableStatus.AVAILABLE);
+        tables.put(2, TableStatus.AVAILABLE);
+        tables.put(3, TableStatus.AVAILABLE);
+        tables.put(4, TableStatus.AVAILABLE);
+        tables.put(5, TableStatus.AVAILABLE);
     }
 
     @Test
     public void testBookTable() throws Exception {
         try (MockedStatic<TableBookingIO> mocked = Mockito.mockStatic(TableBookingIO.class)) {
-            mocked.when(()->TableBookingIO.getTablesAvailability()).thenReturn(tables);
+            mocked.when(() -> TableBookingIO.getTablesAvailability()).thenReturn(tables);
             BookTableService.bookTable();
             assertEquals(tables.get(1), TableStatus.UNAVAILABLE);
 

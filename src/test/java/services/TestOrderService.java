@@ -25,7 +25,7 @@ public class TestOrderService {
 
 
     @BeforeEach
-    public void setup(){
+    public void setup() {
         menuItems = null;
         order = new Order(1, OrderStatus.PLACED, 1, menuItems);
         orders = new ArrayList<>();

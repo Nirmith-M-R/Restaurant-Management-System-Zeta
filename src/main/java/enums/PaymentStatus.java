@@ -1,5 +1,5 @@
 package enums;
 
 public enum PaymentStatus {
-    PENDING,PAID
+    PENDING, PAID
 }

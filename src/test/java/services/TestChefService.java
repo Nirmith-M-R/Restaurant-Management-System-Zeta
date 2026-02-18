@@ -23,7 +23,7 @@ public class TestChefService {
 
 
     @BeforeEach
-    public void setup(){
+    public void setup() {
         menuItems = null;
         order = new Order(1, OrderStatus.PLACED, 1, menuItems);
         orders = new ArrayList<>();
@@ -31,10 +31,10 @@ public class TestChefService {
     }
 
     @Test
-    public void testViewCurrentOrders(){
+    public void testViewCurrentOrders() {
         try (MockedStatic<OrderIO> mocked = Mockito.mockStatic(OrderIO.class)) {
-            mocked.when(()->OrderIO.addOrdersToFile(orders)).thenReturn(true);
-            mocked.when(()->OrderIO.getOrdersFromFile()).thenReturn(orders);
+            mocked.when(() -> OrderIO.addOrdersToFile(orders)).thenReturn(true);
+            mocked.when(() -> OrderIO.getOrdersFromFile()).thenReturn(orders);
             List<Order> pendingOrders = ChefService.viewCurrentOrders();
             assertEquals(orders.get(0).orderId, pendingOrders.get(0).orderId);
         } catch (Exception e) {
@@ -42,10 +42,11 @@ public class TestChefService {
         }
     }
 
-    @Test void testUpdateOrderStatus(){
+    @Test
+    void testUpdateOrderStatus() {
         try (MockedStatic<OrderIO> mocked = Mockito.mockStatic(OrderIO.class)) {
-            mocked.when(()->OrderIO.addOrdersToFile(orders)).thenReturn(true);
-            mocked.when(()->OrderIO.getOrdersFromFile()).thenReturn(orders);
+            mocked.when(() -> OrderIO.addOrdersToFile(orders)).thenReturn(true);
+            mocked.when(() -> OrderIO.getOrdersFromFile()).thenReturn(orders);
             boolean updateResult = ChefService.updateOrderStatus(1);
             assertTrue(updateResult);
         } catch (Exception e) {

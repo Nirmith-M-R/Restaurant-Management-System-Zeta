@@ -7,7 +7,7 @@ import model.Order;
 import java.util.List;
 
 public class OrderService {
-    public static void createOrder(Order order){
+    public static void createOrder(Order order) {
         try {
             List<Order> orders = OrderIO.getOrdersFromFile();
             orders.add(order);
@@ -20,17 +20,17 @@ public class OrderService {
         }
     }
 
-    public static void updateStatus(int orderId, OrderStatus orderStatus){
+    public static void updateStatus(int orderId, OrderStatus orderStatus) {
         try {
             List<Order> orders = OrderIO.getOrdersFromFile();
-            for(Order order:orders){
-                if (order.orderId == orderId){
-                    order.orderStatus=orderStatus;
+            for (Order order : orders) {
+                if (order.orderId == orderId) {
+                    order.orderStatus = orderStatus;
                     break;
                 }
             }
             boolean orderUpdateStatus = OrderIO.addOrdersToFile(orders);
-            if (orderUpdateStatus){
+            if (orderUpdateStatus) {
                 System.out.printf("Order update to %s successfully.%n", orderStatus);
             }
         } catch (Exception e) {

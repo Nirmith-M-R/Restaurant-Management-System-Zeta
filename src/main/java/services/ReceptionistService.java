@@ -11,16 +11,16 @@ import java.util.List;
 
 public class ReceptionistService {
 
-    public static void bookTableForWalkIns(){
+    public static void bookTableForWalkIns() {
         System.out.println("Booking table for walk-in customer...");
         BookTableService.bookTable();
     }
 
-    public static void receivePayment(int tableNumber){
+    public static void receivePayment(int tableNumber) {
         try {
             List<Bill> bills = BillIO.getBillsFromFile();
             double amount = 0;
-            for (Bill bill: bills){
+            for (Bill bill : bills) {
                 if (bill.billId == tableNumber) {
                     if (bill.paymentStatus == PaymentStatus.PENDING) {
                         bill.paymentStatus = PaymentStatus.PAID;
@@ -30,7 +30,7 @@ public class ReceptionistService {
                 }
             }
             BillIO.addOrUpdateBillToFile(bills);
-            System.out.println(String.format("Payment Recieved for billId : %d, ₹%f",tableNumber,amount));
+            System.out.println(String.format("Payment Recieved for billId : %d, ₹%f", tableNumber, amount));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -46,7 +46,7 @@ public class ReceptionistService {
                 totalAmount += item.price;
             }
         }
-        Bill bill = new Bill(tableNumber,totalAmount, PaymentStatus.PENDING);
+        Bill bill = new Bill(tableNumber, totalAmount, PaymentStatus.PENDING);
         System.out.println("Bill generated successfully for table " + tableNumber);
     }
 }

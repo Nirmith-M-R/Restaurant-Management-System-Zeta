@@ -27,7 +27,7 @@ public class TestOrderIO {
 
 
     @BeforeEach
-    public void setup(){
+    public void setup() {
         menuItems = null;
         order = new Order(1, OrderStatus.PLACED, 1, menuItems);
         orders = new ArrayList<>();
@@ -63,14 +63,14 @@ public class TestOrderIO {
             ObjectMapper mapperMock = mock(ObjectMapper.class);
 
             when(mapperMock.readValue(any(File.class),
-                            any(TypeReference.class))
+                    any(TypeReference.class))
             ).thenReturn(orders);
 
             OrderIO.mapper = mapperMock;
 
             List<Order> res = OrderIO.getOrdersFromFile();
             assertEquals(orders, res);
-        }catch (Exception e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }

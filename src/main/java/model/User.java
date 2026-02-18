@@ -39,7 +39,7 @@ public class User {
         this.workingStatus = workingStatus;
     }
 
-    public User(UserType userType){
+    public User(UserType userType) {
         this.id = -1;
         this.userType = userType;
     }

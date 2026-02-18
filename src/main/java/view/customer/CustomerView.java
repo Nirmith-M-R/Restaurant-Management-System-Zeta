@@ -12,11 +12,11 @@ import java.util.List;
 import java.util.Scanner;
 
 public class CustomerView {
-    public static void customerView(String name){
+    public static void customerView(String name) {
         Scanner scanner = ScannerUtil.getScanner();
 
-        while(true){
-            try{
+        while (true) {
+            try {
                 System.out.println(String.format("Welcome, %s to %s", name, Env.RESTAURANTNAME));
                 System.out.println("\n1. View Menu\n2. Check Availability of Tables\n3. Book a Table\n4. Logout");
                 int customerChoice = scanner.nextInt();
@@ -33,14 +33,14 @@ public class CustomerView {
                         CustomerService.bookTable();
                         break;
                     }
-                    case 4:{
+                    case 4: {
                         System.out.println("Logging out...");
                         return;
                     }
                     default:
                         System.out.println("Invalid input");
                 }
-            }catch (Exception exception){
+            } catch (Exception exception) {
                 System.out.println("Invalid input. Please enter a valid number.");
                 scanner.nextLine();
             }

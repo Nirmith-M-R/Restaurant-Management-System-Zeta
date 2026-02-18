@@ -30,7 +30,7 @@ public class TableBookingIO {
 
     }
 
-    public static void setTableAvailability(Map<Integer,TableStatus> tables) throws Exception {
+    public static void setTableAvailability(Map<Integer, TableStatus> tables) throws Exception {
         try {
             mapper.writerWithDefaultPrettyPrinter()
                     .writeValue(new File(Env.TABLEBOOKED), tables);

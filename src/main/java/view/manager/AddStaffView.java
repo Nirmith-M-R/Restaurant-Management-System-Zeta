@@ -12,13 +12,13 @@ import java.io.Console;
 import java.util.Scanner;
 
 public class AddStaffView {
-    public static void addStaffView(){
+    public static void addStaffView() {
 
         Scanner scanner = ScannerUtil.getScanner();
 
         System.out.println(String.format("Welcome to %s !!", Env.RESTAURANTNAME));
 
-        try{
+        try {
             System.out.print("Enter Name: ");
             String name = scanner.next();
 

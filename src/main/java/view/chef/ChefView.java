@@ -12,10 +12,10 @@ import java.util.Scanner;
 
 public class ChefView {
 
-    public static void chefView(String name){
+    public static void chefView(String name) {
         Scanner scanner = ScannerUtil.getScanner();
-        while (true){
-            try{
+        while (true) {
+            try {
                 System.out.println(String.format("Welcome, %s to %s", name, Env.RESTAURANTNAME));
                 System.out.println("\nEnter your choice:\n1. View Current orders\n2. Update order status\n3. Logout");
                 int chefChoice = scanner.nextInt();
@@ -40,12 +40,12 @@ public class ChefView {
                         }
                         break;
                     }
-                    case 3:{
+                    case 3: {
                         System.out.println("Logging out...");
                         return;
                     }
                 }
-            }catch (Exception invalidInputException){
+            } catch (Exception invalidInputException) {
                 System.out.println("Invalid input. Please enter a valid number.");
                 scanner.nextLine();
             }

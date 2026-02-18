@@ -6,12 +6,12 @@ import model.MenuItem;
 import java.util.List;
 
 public class MenuService {
-    public static MenuItem getMenuItem(String id){
+    public static MenuItem getMenuItem(String id) {
         List<MenuItem> menuItemsList;
         try {
             menuItemsList = MenuItemsIO.loadFromFile();
-            for (MenuItem menuItem: menuItemsList){
-                if (menuItem.itemId.equals(id)){
+            for (MenuItem menuItem : menuItemsList) {
+                if (menuItem.itemId.equals(id)) {
                     return menuItem;
                 }
             }

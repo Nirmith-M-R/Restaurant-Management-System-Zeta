@@ -67,14 +67,9 @@ public class ManageStaffView {
                 }
 
                 case 2 -> {
-                    Console console = System.console();
-                    if (console == null) {
-                        System.out.println("Run in terminal!");
-                        return;
-                    }
-
-                    char[] password = console.readPassword("Enter new password: ");
-                    boolean updated = ManagerService.updatePassword(id, password);
+                    System.out.println("Enter Password: ");
+                    String password = scanner.next();
+                    boolean updated = ManagerService.updatePassword(id, password.toCharArray());
 
                     if (updated)
                         System.out.println("Password updated.");

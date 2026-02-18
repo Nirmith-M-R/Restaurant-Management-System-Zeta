@@ -18,7 +18,7 @@ public class Order {
             @JsonProperty("orderStatus") OrderStatus orderStatus,
             @JsonProperty("tableNumber") int tableNumber,
             @JsonProperty("itemList") List<MenuItem> itemList) {
-        this.orderId=orderId;
+        this.orderId = orderId;
         this.orderStatus = orderStatus;
         this.tableNumber = tableNumber;
         this.itemList = itemList;

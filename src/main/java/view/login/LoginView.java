@@ -10,7 +10,7 @@ import java.io.Console;
 import java.util.Scanner;
 
 public class LoginView {
-    public static void loginView(){
+    public static void loginView() {
         Scanner scanner = ScannerUtil.getScanner();
         System.out.println(String.format("Welcome to, %s", Env.RESTAURANTNAME));
         System.out.println("======= Login Page =======");
@@ -20,13 +20,13 @@ public class LoginView {
         if (console == null) return;
         char[] passwordChar = console.readPassword("Enter password: ");
         String password = new String(passwordChar);
-        User user  = AuthService.login(id, password);
+        User user = AuthService.login(id, password);
 
-        switch (user.getUserType()){
-            case WAITER : {
+        switch (user.getUserType()) {
+            case WAITER: {
                 break;
             }
-            case MANAGER : {
+            case MANAGER: {
                 break;
             }
             case RECEPTIONIST: {
@@ -35,7 +35,7 @@ public class LoginView {
             case CUSTOMER: {
                 break;
             }
-            case CHEF:{
+            case CHEF: {
                 break;
             }
             case INVALID: {

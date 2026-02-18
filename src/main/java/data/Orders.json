@@ -1,1 +1,27 @@
-[]
+[ {
+  "orderId" : 1,
+  "orderStatus" : "PREPARED",
+  "tableNumber" : 1,
+  "itemList" : [ {
+    "itemId" : "1",
+    "name" : "Coffee",
+    "price" : 200.0
+  }, {
+    "itemId" : "2",
+    "name" : "BisibeleBath",
+    "price" : 99.0
+  } ]
+}, {
+  "orderId" : 1,
+  "orderStatus" : "PROCESSING",
+  "tableNumber" : 1,
+  "itemList" : [ {
+    "itemId" : "2",
+    "name" : "BisibeleBath",
+    "price" : 99.0
+  }, {
+    "itemId" : "3",
+    "name" : "RagiMudde",
+    "price" : 39.0
+  } ]
+} ]

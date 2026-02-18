@@ -13,12 +13,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestMenuService {
     @Test
-    public void testGetMenuItem(){
+    public void testGetMenuItem() {
         List<MenuItem> menuItems;
         menuItems = new ArrayList<>();
         menuItems.add(new MenuItem("1", "tea", 200.0));
-        try(MockedStatic<MenuItemsIO> mocked = Mockito.mockStatic(MenuItemsIO.class)){
-            mocked.when(()->MenuItemsIO.loadFromFile()).thenReturn(menuItems);
+        try (MockedStatic<MenuItemsIO> mocked = Mockito.mockStatic(MenuItemsIO.class)) {
+            mocked.when(() -> MenuItemsIO.loadFromFile()).thenReturn(menuItems);
             MenuItem item = MenuService.getMenuItem("1");
             assertTrue(menuItems.get(0).name.equals(item.name));
         }

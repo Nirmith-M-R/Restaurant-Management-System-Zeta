@@ -35,8 +35,8 @@ public class TestReceptionistService {
         ReceptionistService.receivePayment(1);
         List<Bill> updatedBills = BillIO.getBillsFromFile();
         assertEquals(PaymentStatus.PAID, updatedBills.get(0).paymentStatus);
-        //assertTrue(output.toString().contains("Payment Recieved for billId : 1"));
     }
+
     @Test
     void testReceivePayment_marksBillUnPaid() throws Exception {
         List<Bill> bills = new ArrayList<>();
@@ -69,12 +69,13 @@ public class TestReceptionistService {
         String printed = output.toString();
         assertTrue(printed.contains("Booking table for walk-in customer"));
     }
+
     @Test
     public void testGenerateBill() throws Exception {
-        MenuItem m1 = new MenuItem("4","Sandwich",400);
-        MenuItem m2 = new MenuItem("5","Noodles",300);
+        MenuItem m1 = new MenuItem("4", "Sandwich", 400);
+        MenuItem m2 = new MenuItem("5", "Noodles", 300);
         List<MenuItem> itemList = Arrays.asList(m1, null, m2);
-        Order order = new Order(4, OrderStatus.SERVED,3,itemList);
+        Order order = new Order(4, OrderStatus.SERVED, 3, itemList);
         List<Order> orders = List.of(order);
 
         try (MockedStatic<OrderIO> mocked = Mockito.mockStatic(OrderIO.class)) {

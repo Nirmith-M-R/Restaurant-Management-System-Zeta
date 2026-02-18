@@ -10,12 +10,12 @@ import java.util.List;
 public class ChefService {
     static List<Order> pendingOrders = new ArrayList<>();
 
-    public static List<Order> viewCurrentOrders(){
+    public static List<Order> viewCurrentOrders() {
         try {
             List<Order> orders = OrderIO.getOrdersFromFile();
 
             for (Order order : orders) {
-                if (order.orderStatus == OrderStatus.PLACED){
+                if (order.orderStatus == OrderStatus.PLACED) {
                     order.orderStatus = OrderStatus.PROCESSING;
                 }
             }
@@ -29,11 +29,11 @@ public class ChefService {
         return new ArrayList<>();
     }
 
-    public static boolean updateOrderStatus(int orderId){
+    public static boolean updateOrderStatus(int orderId) {
         try {
             List<Order> orders = OrderIO.getOrdersFromFile();
-            for (Order order:orders){
-                if (order.orderId == orderId){
+            for (Order order : orders) {
+                if (order.orderId == orderId) {
                     order.orderStatus = OrderStatus.PREPARED;
                     break;
                 }
