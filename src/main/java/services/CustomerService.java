@@ -11,7 +11,7 @@ import java.util.Map;
 public class CustomerService {
 
     public static void viewMenu() {
-        List<MenuItem> menu = null;
+        List<MenuItem> menu;
         try {
             menu = MenuItemsIO.loadFromFile();
         } catch (Exception e) {
@@ -22,8 +22,8 @@ public class CustomerService {
         }
     }
 
-    public void bookTableForWalkIns(){
-        System.out.println("Booking table...");
+    public static void bookTable(){
+        System.out.println("Booking table.");
         BookTableService.bookTable();
     }
 
