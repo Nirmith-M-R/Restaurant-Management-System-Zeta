@@ -7,6 +7,7 @@ import env.Env;
 import model.User;
 import services.ManagerService;
 import util.ScannerUtil;
+import util.ValidatorUtil;
 
 import java.io.Console;
 import java.util.Scanner;
@@ -24,6 +25,11 @@ public class AddStaffView {
 
             System.out.print("\nEnter phone number: ");
             int phno = scanner.nextInt();
+
+            boolean validatePhoneNumber = ValidatorUtil.validatePhoneNumber(phno);
+            if (!validatePhoneNumber){
+                throw new Exception("Invalid phone Number");
+            }
 
             System.out.println("Enter User Type:\n1.Waiter\n2.Chef\n3.Manager\n4.Customer\n5.Receptionist");
 
@@ -61,22 +67,29 @@ public class AddStaffView {
             int idProofTypeChoice = scanner.nextInt();
 
             IdProofType idProofType;
+            boolean validateGovtId;
 
             switch (idProofTypeChoice) {
                 case 1:
                     idProofType = IdProofType.AADHAR;
+                    validateGovtId = ValidatorUtil.validateAadharNumber(govtIdProof);
                     break;
                 case 2:
                     idProofType = IdProofType.PAN;
+                    validateGovtId = ValidatorUtil.validatePanNumber(govtIdProof);
                     break;
                 case 3:
                     idProofType = IdProofType.VOTERID;
+                    validateGovtId = ValidatorUtil.validateVoterIDNumber(govtIdProof);
                     break;
                 default:
                     System.out.println("Wrong choice entered");
                     return;
             }
 
+            if (!validateGovtId){
+                throw new Exception("Invalid Govt ID");
+            }
             System.out.println("Enter Password: ");
             String password = scanner.next();
 
@@ -98,7 +111,7 @@ public class AddStaffView {
             else
                 System.out.println("Failed to add user.");
         } catch (Exception e) {
-            System.out.println("Invalid input. Please enter a valid number.");
+            System.out.println("Invalid input.");
             scanner.nextLine();
         }
     }

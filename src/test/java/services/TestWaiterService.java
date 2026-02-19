@@ -1,6 +1,7 @@
 package services;
 
 import enums.OrderStatus;
+import io.MenuItemsIO;
 import io.OrderIO;
 import model.MenuItem;
 import model.Order;
@@ -33,13 +34,16 @@ public class TestWaiterService {
 
     @Test
     public void testViewMenu() throws Exception {
-        menuItems.add(new MenuItem("1", "Tea", 20));
-        ByteArrayOutputStream output = new ByteArrayOutputStream();
-        PrintStream originalOut = System.out;
-        System.setOut(new PrintStream(output));
-        WaiterService.viewMenu();
-        String printed = output.toString();
-        assertTrue(printed.contains("Coffee"));
+        try (MockedStatic<MenuItemsIO> mocked = Mockito.mockStatic(MenuItemsIO.class)) {
+            menuItems.add(new MenuItem("1", "Tea", 20));
+            mocked.when(() -> MenuItemsIO.loadFromFile()).thenReturn(menuItems);
+            ByteArrayOutputStream output = new ByteArrayOutputStream();
+            PrintStream originalOut = System.out;
+            System.setOut(new PrintStream(output));
+            WaiterService.viewMenu();
+            String printed = output.toString();
+            assertTrue(printed.contains("1 | Tea | ₹20"));
+        }
     }
 
     @Test
